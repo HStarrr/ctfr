@@ -22,7 +22,7 @@ def parse_args():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--domain', type=str, required=True, help="Target domain. eg: google.com")
-    parser.add_argument('-o', '--output', type=str, required=True, help="Output file.")
+    parser.add_argument('-o', '--output', type=str, help="Output file.")
     parser.add_argument('-x', '--xpath', action='store_true', help="Get result for xpath.")
     return parser.parse_args()
 
@@ -104,8 +104,10 @@ def main():
     output = args.output
 
     if args.xpath:
+        print('[!] Use [Xpath] format get result.')
         results = get_result_for_html(target)
     else:
+        print('[!] Use [Json] format get result.')
         results = get_result_for_json(target)
 
     print("\n[!] ---- TARGET: {d} ---- [!] \n".format(d=target))
@@ -114,11 +116,14 @@ def main():
 
     if output is not None:
         save_subdomains(subdomains, output)
+    else:
+        save_subdomains(subdomains, target+'.txt')
 
     for subdomain in subdomains:
         print("[+]  {s}".format(s=subdomain))
 
-    print("\n\n[!]  Done. Have a nice day! ;).")
+    print('\n\n[!]  Find {} domain.'.format(len(subdomains)))
+    print("[!]  Done. Have a nice day! :).")
 
 
 if __name__ == '__main__':
