@@ -33,6 +33,7 @@ Parameters and examples of use.
 ```
 -d --domain [target_domain] (required)
 -o --output [output_file] (optional)
+-x, --xpath (optional)
 ```
 
 ### Examples
